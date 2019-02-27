@@ -31,10 +31,10 @@ function deleteHero(node){
 }
 
 
-function editHero(node){
+function saveEditHero(node, inputId){
 
     const newHero = document.createElement("li")
-    newHero.innerText = document.getElementById("hero-name").value
+    newHero.innerText = document.getElementById(inputId).value
 
     const buttonDelete = document.createElement("input")
     buttonDelete.type = "button"
@@ -57,3 +57,24 @@ function editHero(node){
 
 }
 
+function editHero(node){
+
+    const newHero = document.createElement("li")
+
+    const input = document.createElement("input")
+    input.type = "text"
+    input.id = node.parentElement.innerText.trim()
+    input.value = node.parentElement.innerText
+
+    const button = document.createElement("input")
+    button.type = "button"
+    button.value = "Save"
+    button.addEventListener("click", function(){
+        saveEditHero(this, node.parentElement.innerText.trim())
+    })
+
+    newHero.appendChild(input)
+    newHero.appendChild(button)
+
+    lista.replaceChild(newHero, node.parentElement)
+}
