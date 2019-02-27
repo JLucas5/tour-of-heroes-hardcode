@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+
+<body>
+    <h1 id="title">Tour of Heroes Hardcode</h1>
+
+    <label for="hero-name">Name a Hero:</label>
+    
+    <input type="text" id="hero-name" name="hero-name">
+
+    <input type="button" id="save-hero" value="Save" onclick="saveHero()">
+
+    <ul id='hero-list'>
+        <li>Zattana   <input type="button" value="Delete" onclick="deleteHero(this)"><input type="button" value="Edit" onclick="editHero(this)"></li> 
+        <li>Spiderman   <input type="button" value="Delete" onclick="deleteHero(this)"><input type="button" value="Edit" onclick="editHero(this)"></li>
+        <li>Batman   <input type="button"  value="Delete" onclick="deleteHero(this)"><input type="button" value="Edit" onclick="editHero(this)"></li>
+    </ul>
+
+    <script src="script.js"></script> 
+</body>
