@@ -1,60 +1,77 @@
+let heroes = [
+    {name: "Zattana", id:1},
+    {name: "Batman", id:2},
+    {name: "Superman", id:3}
+]
+let count = 3
 const lista = document.getElementById("hero-list")
 
+function syncList(){
+    
+    document.getElementById("hero-list").innerHTML = ""
+
+    heroes.forEach(hero => {
+        const node = document.createElement("li")
+        node.innerText = hero.name
+
+        const buttonDelete = document.createElement("input")
+        buttonDelete.type = "button"
+        buttonDelete.value = "Delete"
+        buttonDelete.addEventListener("click", function(){
+            deleteHero(this)
+        })
+
+        const buttonEdit = document.createElement("input")
+        buttonEdit.type = "button"
+        buttonEdit.value = "Edit"
+        buttonEdit.addEventListener("click", function(){
+            editHero(this)
+        })
+
+        node.appendChild(buttonDelete)
+        node.appendChild(buttonEdit)
+        lista.appendChild(node)
+
+    });
+
+}syncList()
+
 function saveHero(){
-    const node = document.createElement("li")
-    node.innerText = document.getElementById("hero-name").value
 
-    const buttonDelete = document.createElement("input")
-    buttonDelete.type = "button"
-    buttonDelete.value = "Delete"
-    buttonDelete.addEventListener("click", function(){
-        deleteHero(this)
-    })
+    const hero = {
+        name: document.getElementById("hero-name").value,
+        id: count++
+    }
 
+    heroes.push(hero)
 
-    const buttonEdit = document.createElement("input")
-    buttonEdit.type = "button"
-    buttonEdit.value = "Edit"
-    buttonEdit.addEventListener("click", function(){
-        editHero(this)
-    })
-
-    node.appendChild(buttonDelete)
-    node.appendChild(buttonEdit)
-    lista.appendChild(node)
+    syncList()
     
 }
 
 
 function deleteHero(node){
-    node.parentElement.remove()
+    heroes = heroes.filter(hero => hero.name != node.parentElement.innerText)
+    syncList()
 }
 
 
 function saveEditHero(node, inputId){
 
-    const newHero = document.createElement("li")
-    newHero.innerText = document.getElementById(inputId).value
+    const newHero = {
+        name: document.getElementById(inputId),
+        id: count++
+    }
 
-    const buttonDelete = document.createElement("input")
-    buttonDelete.type = "button"
-    buttonDelete.value = "Delete"
-    buttonDelete.addEventListener("click", function(){
-        deleteHero(this)
-    })
 
-    
-    const buttonEdit = document.createElement("input")
-    buttonEdit.type = "button"
-    buttonEdit.value = "Edit"
-    buttonEdit.addEventListener("click", function(){
-        editHero(this)
-    })
-    newHero.appendChild(buttonDelete)
-    newHero.appendChild(buttonEdit)
-    
-    lista.replaceChild(newHero, node.parentElement)
+    heroes.forEach(hero => {
+        console.log(hero.name, node.parentElement.id)
+        if(hero.name.trim() == node.innerText.trim() ){
+            heroes.splice(heroes.indexOf(hero), 1, newHero)
+        }
+    });
 
+    syncList()
 }
 
 function editHero(node){

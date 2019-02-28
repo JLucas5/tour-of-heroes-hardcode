@@ -1,0 +1,15 @@
+#lista{
+    float: left;
+    width: 400px;
+    height: 100px;
+    margin: 1em;
+    border: 1px black;
+}
+
+#dados{
+    float: left;
+    width: 300px;
+    height: 100px;
+    margin: 1em;
+    border: 1px black;
+}

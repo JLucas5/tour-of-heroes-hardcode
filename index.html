@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 
 <body>
     <h1 id="title">Tour of Heroes Hardcode</h1>
-
-    <label for="hero-name">Name a Hero:</label>
     
-    <input type="text" id="hero-name" name="hero-name">
+    <div id="lista">
 
-    <input type="button" id="save-hero" value="Save" onclick="saveHero()">
+        <label for="hero-name">Name a Hero:</label>
+        
+        <input type="text" id="hero-name" name="hero-name">
 
-    <ul id='hero-list'>
-        <li>Zattana   <input type="button" value="Delete" onclick="deleteHero(this)"><input type="button" value="Edit" onclick="editHero(this)"></li> 
-        <li>Spiderman   <input type="button" value="Delete" onclick="deleteHero(this)"><input type="button" value="Edit" onclick="editHero(this)"></li>
-        <li>Batman   <input type="button"  value="Delete" onclick="deleteHero(this)"><input type="button" value="Edit" onclick="editHero(this)"></li>
-    </ul>
+        <input type="button" id="save-hero" value="Save" onclick="saveHero()">
 
+        <ul id='hero-list'></ul>
+    </div>
+
+    <div id="dados">
+        <ul>
+            <li>Nome: </li>
+            <li>Id: </li>
+        </ul>
+    </div>
     <script src="script.js"></script> 
 </body>
