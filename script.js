@@ -28,6 +28,8 @@ function syncList(){
         node.id = hero.id
         node.innerText = hero.name
         node.onclick = showHero
+        node.setAttribute("class", "collection-item")
+        
         console.log(node)
 
          lista.appendChild(node)
@@ -38,17 +40,25 @@ function syncList(){
 
 function showHero(node){ 
 
+    const items = document.getElementById("hero-list").children
+
+    for (let i = 0; i < items.length; i++) {
+        items.item(i).setAttribute("class", "collection-item")
+      }
+    
     document.getElementById("dados").hidden = false
 
     document.getElementById("name-display").innerText = node.target.innerText
     document.getElementById("id-display").innerText = node.target.id
     document.getElementById("edit-name").value = node.target.innerText
+
+    node.target.setAttribute("class", "collection-item active")
 }
 
 function updateName(event){
     const id = document.getElementById("id-display").innerHTML
-    document.getElementById("name-display").innerText = event.target.value
-    document.getElementById(id).innerText = event.target.value
+    document.getElementById("name-display").innerText = event.value
+    document.getElementById(id).innerText = event.value
 
 }
 
