@@ -1,9 +1,22 @@
-let heroes = [
-    {name: "Zattana", id:1},
-    {name: "Batman", id:2},
-    {name: "Superman", id:3}
-]
+let heroes = []
+
+const url = "http://demo6199107.mockable.io/heroes.json"
+
+let req = new XMLHttpRequest()
+
+req.open("GET", url)
+
+req.onload = () => {
+   console.log(req.response)
+   heroes = JSON.parse(req.response).heroes
+
+   syncList()
+};
+
+  req.send()
+
 let count = 3
+
 const lista = document.getElementById("hero-list")
 
 function syncList(){
@@ -12,29 +25,32 @@ function syncList(){
 
     heroes.forEach(hero => {
         const node = document.createElement("li")
+        node.id = hero.id
         node.innerText = hero.name
+        node.onclick = showHero
+        console.log(node)
 
-        const buttonDelete = document.createElement("input")
-        buttonDelete.type = "button"
-        buttonDelete.value = "Delete"
-        buttonDelete.addEventListener("click", function(){
-            deleteHero(this)
-        })
-
-        const buttonEdit = document.createElement("input")
-        buttonEdit.type = "button"
-        buttonEdit.value = "Edit"
-        buttonEdit.addEventListener("click", function(){
-            editHero(this)
-        })
-
-        node.appendChild(buttonDelete)
-        node.appendChild(buttonEdit)
-        lista.appendChild(node)
+         lista.appendChild(node)
 
     });
 
-}syncList()
+}
+
+function showHero(node){ 
+
+    document.getElementById("dados").hidden = false
+
+    document.getElementById("name-display").innerText = node.target.innerText
+    document.getElementById("id-display").innerText = node.target.id
+    document.getElementById("edit-name").value = node.target.innerText
+}
+
+function updateName(event){
+    const id = document.getElementById("id-display").innerHTML
+    document.getElementById("name-display").innerText = event.target.value
+    document.getElementById(id).innerText = event.target.value
+
+}
 
 function saveHero(){
 
@@ -56,18 +72,14 @@ function deleteHero(node){
 }
 
 
-function saveEditHero(node, inputId){
+function saveEditHero(button, inputId){
 
-    const newHero = {
-        name: document.getElementById(inputId),
-        id: count++
-    }
-
+    const input = document.getElementById(inputId)
+    console.log(inputId)
 
     heroes.forEach(hero => {
-        console.log(hero.name, node.parentElement.id)
-        if(hero.name.trim() == node.innerText.trim() ){
-            heroes.splice(heroes.indexOf(hero), 1, newHero)
+        if(hero.name === input.value){
+           console.log("achei")
         }
     });
 
@@ -78,20 +90,26 @@ function editHero(node){
 
     const newHero = document.createElement("li")
 
+    const peInnertext = node.parentElement.innerText
+
     const input = document.createElement("input")
     input.type = "text"
-    input.id = node.parentElement.innerText.trim()
-    input.value = node.parentElement.innerText
+    input.id = peInnertext
+    input.value = peInnertext
 
     const button = document.createElement("input")
     button.type = "button"
     button.value = "Save"
     button.addEventListener("click", function(){
-        saveEditHero(this, node.parentElement.innerText.trim())
+        saveEditHero(this, peInnertext)
     })
 
     newHero.appendChild(input)
     newHero.appendChild(button)
 
     lista.replaceChild(newHero, node.parentElement)
+}
+
+function closeDados(){
+    document.getElementById("dados").hidden = true
 }

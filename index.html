@@ -11,20 +11,17 @@
     <h1 id="title">Tour of Heroes Hardcode</h1>
     
     <div id="lista">
-
-        <label for="hero-name">Name a Hero:</label>
-        
-        <input type="text" id="hero-name" name="hero-name">
-
-        <input type="button" id="save-hero" value="Save" onclick="saveHero()">
-
-        <ul id='hero-list'></ul>
+        <ul id="hero-list"></ul>
     </div>
 
-    <div id="dados">
-        <ul>
-            <li>Nome: </li>
-            <li>Id: </li>
+    <div>
+        <ul id="dados" hidden="true">
+            <li><span id="name-display"></span><span> Details</span></li>
+            <li><span>Id: </span><span id="id-display" ></span></li>
+            <br>
+            <input id="edit-name" value ="" onkeyup="updateName(this)">
+            <br>
+            <input id="button-close" type="button" value="Close" onclick="closeDados()">
         </ul>
     </div>
     <script src="script.js"></script> 
