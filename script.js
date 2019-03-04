@@ -1,6 +1,6 @@
 let heroes = []
 
-const url = "http://demo6199107.mockable.io/heroes.json"
+const url = "https://demo6199107.mockable.io/heroes.json"
 
 let req = new XMLHttpRequest()
 
